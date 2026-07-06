@@ -6,7 +6,7 @@ CREATE TABLE Players (player_id INTEGER PRIMARY KEY,
                     team TEXT,
                     player_number TEXT,
                     position TEXT,
-                    bat_side TEXT
+                    bat_side TEXT,
                     throw_side TEXT);
 
 CREATE TABLE Stats (player_id INTEGER,

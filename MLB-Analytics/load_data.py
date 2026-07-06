@@ -2,13 +2,14 @@ import sqlite3
 import requests
 import db
 
-
+#Store URLs to mlb api
 STATS_URL = "https://statsapi.mlb.com/api/v1/stats"
 PERSON_URL = "https://statsapi.mlb.com/api/v1/people/"
 
 conn = db.get_db()
 cursor = conn.cursor()
 
+#Create range from 2000 to 2026 to enter data into database
 for year in range(2000, 2026):
     params = {"stats":"season",
               "group":"hitting",
@@ -54,7 +55,7 @@ for (player_id,) in rows:
     person = person_data["people"][0]
     player_name = person["fullName"]
     active = person["active"]
-    number = person["primaryNumber"]
+    number = person.get("primaryNumber", "N/A")
     batSide = person["batSide"]["code"]
     pitchHand = person["pitchHand"]["code"]
     position = person["primaryPosition"]["abbreviation"]
@@ -68,3 +69,6 @@ for (player_id,) in rows:
     else:
         cursor.execute("UPDATE Players SET player_name = ?, player_number = ?, position = ?, bat_side = ?, throw_side = ? WHERE player_id = ?;",
                        (player_name, number, position,batSide, pitchHand, player_id))
+        
+conn.commit()
+conn.close()
