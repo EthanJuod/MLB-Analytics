@@ -7,7 +7,7 @@ The project uses the MLB Stats API to collect player and season data from 2000â€
 
 Project Status
 
-ðŸš§ In Progress
+In Progress
 
 The database and data collection functionality are currently being developed. Additional statistical queries, analysis features, and improvements to the application are planned.
 
